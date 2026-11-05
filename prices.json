@@ -1,0 +1,13 @@
+{
+  "month": "November 2026",
+  "effective": "2026-11-02",
+  "updated": "2026-11-05",
+  "currency": "BHD",
+  "unit": "per litre",
+  "prices": {
+    "jayyid": 0.235,
+    "mumtaz": 0.277,
+    "super": 0.410,
+    "diesel": 0.260
+  }
+}
