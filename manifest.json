@@ -1,0 +1,17 @@
+{
+    "name": "Bahrain Fuel Cost",
+    "short_name": "Fuel Cost",
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "background_color": "#071f33",
+    "theme_color": "#071f33",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        }
+    ]
+}

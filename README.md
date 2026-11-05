@@ -1,25 +1,48 @@
 # Bahrain Fuel Cost
 
-Calculates monthly fuel cost in Bahrain (BHD) from distance or fill-ups, for Jayyid 91, Mumtaz 95, Super 98 and Diesel.
+A mobile-friendly calculator for monthly fuel cost in Bahrain (BHD). Pick a fuel, enter your distance and consumption (or fill-ups per month) and see the cost per month, day, km and year. No account, no backend, no build step.
 
-## Files
+## Features
 
-- `index.html` is the whole app. It reads `prices.json` when it loads.
-- `prices.json` holds the current pump prices.
-- `scripts/update_prices.py` finds the monthly announcement and rewrites `prices.json`.
-- `.github/workflows/update-prices.yml` runs the script on the 2nd to 5th of each month and commits the change.
+- Jayyid 91, Mumtaz 95, Super 98 and Diesel
+- Two ways to calculate: **by distance** (km and L/100 km) or **by fill-ups** (litres and fill-ups per month)
+- The same use priced on all four fuels
+- Prices come from `prices.json`, which a GitHub Action updates every month
+- You can type your own price to test a rate. It only applies to the current month
+- Your inputs are saved on your device
+- Works offline after the first visit and can be added to the iPhone home screen
+
+## Project structure
+
+| File | Purpose |
+| --- | --- |
+| `index.html` | Page layout |
+| `style.css` | Styling |
+| `app.js` | JavaScript: loads prices, calculates, saves your inputs |
+| `prices.json` | Current pump prices |
+| `scripts/update_prices.py` | Finds the monthly announcement and rewrites `prices.json` |
+| `.github/workflows/update-prices.yml` | Runs the script on the 2nd to 5th of each month |
+| `manifest.json`, `sw.js`, icons | Home screen app and offline use |
 
 ## Publish
 
-1. Create a GitHub repo and upload these files (keep the folder structure, including `.github`).
-2. Go to Settings > Pages, choose "Deploy from a branch", branch `main`, folder `/ (root)`.
-3. Your site appears at `https://<username>.github.io/<repo>/`.
-4. Go to Actions > "Update fuel prices" > Run workflow once to test.
+Settings > Pages > Deploy from a branch > `main` > `/ (root)`. The site is at `https://<username>.github.io/<repo>/`.
 
-## If the automatic update fails
+## Monthly prices
 
-The script only accepts a page that mentions the current month and year and gives four sensible prices. If it finds none by the 5th, the workflow fails and GitHub emails you. Then edit `prices.json` by hand and commit. Four numbers, about a minute.
+The workflow only accepts a page that mentions the current month and year and gives four sensible prices. If it finds none by the 5th, it fails and GitHub emails you. Then edit the four numbers in `prices.json` by hand and commit.
+
+To test it, open Actions > "Update fuel prices" > Run workflow.
 
 ## Run locally
 
-Open `index.html` through a local server (`python3 -m http.server`), because browsers block `fetch` on `file://` pages. If `prices.json` cannot load, the app uses built-in November 2026 prices.
+```bash
+python3 -m http.server 8000
+```
+
+Then visit `http://localhost:8000`.
+
+## Notes
+
+- Offline mode needs HTTPS (or `localhost`).
+- The service worker loads from the network first, so new prices appear as soon as the device is online. To force a full refresh, change `CACHE_NAME` in `sw.js`.

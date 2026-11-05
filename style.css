@@ -1,0 +1,451 @@
+/* Bahrain Fuel Cost
+   Same look as the Table Tennis Score app: deep blue cards, big numbers, pill buttons.
+   The orange is the only warm color and marks the fuel you picked. */
+
+:root {
+  --night: #071f33;
+  --court: #0d4167;
+  --line: rgba(255, 255, 255, 0.28);
+  --fill: rgba(255, 255, 255, 0.09);
+  --paper: #f3f7fa;
+  --ink: #0a2238;
+  --mute: rgba(243, 247, 250, 0.62);
+  --ball: #ff8a1f;
+  --red: #ff7a7a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--night);
+  color: var(--paper);
+  font-family: ui-rounded, "SF Pro Rounded", system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+  min-height: 100dvh;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+select,
+input {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ball);
+  outline-offset: 2px;
+}
+
+.app {
+  width: 100%;
+  max-width: 760px;
+  margin: auto;
+  padding: 20px;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 20px);
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 28px);
+  text-align: center;
+}
+
+h1 {
+  margin: 5px 0 18px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+h2 {
+  margin: 26px 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+/* Fuel and method */
+
+.settings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 10px 38px 10px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--fill)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23f3f7fa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    no-repeat right 16px center;
+  color: var(--paper);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+option {
+  color: var(--ink);
+}
+
+.seg {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--fill);
+  padding: 3px;
+  gap: 3px;
+}
+
+.seg button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--mute);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.seg button[aria-pressed="true"] {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* Input cards: one half of the table each */
+
+.inputs {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  flex: 1;
+  min-width: 0;
+  padding: 18px;
+  border-radius: 24px;
+  background: var(--court);
+  box-shadow: inset 0 0 0 2px var(--line);
+}
+
+.card-label {
+  display: block;
+  min-height: 38px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--mute);
+}
+
+.big-input {
+  width: 100%;
+  margin: 8px 0 12px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--paper);
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  -moz-appearance: textfield;
+}
+
+.big-input::-webkit-outer-spin-button,
+.big-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.stepper {
+  display: flex;
+  gap: 8px;
+}
+
+.stepper button {
+  flex: 1;
+  padding: 14px 6px;
+  border: none;
+  border-radius: 16px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.08s;
+}
+
+.stepper button:active {
+  transform: scale(0.97);
+}
+
+/* Result */
+
+.result {
+  margin-top: 20px;
+  padding: 22px 18px;
+  border-radius: 24px;
+  background: var(--court);
+  box-shadow: inset 0 0 0 2px var(--ball);
+}
+
+.result-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.total {
+  margin: 10px 0 6px;
+  font-size: 84px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.total small {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--ball);
+}
+
+.fuel-line {
+  min-height: 22px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ball);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.stats div {
+  min-width: 0;
+}
+
+.stats b {
+  display: block;
+  font-size: 22px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.stats span {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--mute);
+}
+
+/* Comparison */
+
+.compare {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--fill);
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+
+.row.on {
+  border-color: var(--ball);
+}
+
+.row .name {
+  font-weight: 700;
+}
+
+.row .name small {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--mute);
+}
+
+.row .val {
+  text-align: right;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.row .val small {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--mute);
+}
+
+/* Prices */
+
+.prices {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.prices label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mute);
+}
+
+.prices input {
+  width: 100%;
+  padding: 11px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--fill);
+  color: var(--paper);
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Controls */
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.controls button {
+  padding: 12px 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--fill);
+  color: var(--paper);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.controls button:active {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+#resetAll {
+  border-color: rgba(255, 122, 122, 0.5);
+  background: transparent;
+  color: var(--red);
+}
+
+.note {
+  margin: 18px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--mute);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+/* Phones */
+
+@media (max-width: 600px) {
+  .app {
+    padding: 10px;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 24px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+  }
+
+  h1 {
+    font-size: 19px;
+    margin: 2px 0 12px;
+  }
+
+  .settings {
+    margin-bottom: 12px;
+  }
+
+  .inputs {
+    gap: 8px;
+  }
+
+  .card {
+    padding: 12px 10px;
+    border-radius: 18px;
+  }
+
+  .card-label {
+    font-size: 12px;
+    min-height: 32px;
+  }
+
+  .big-input {
+    font-size: 44px;
+  }
+
+  .stepper button {
+    padding: 12px 4px;
+    font-size: 16px;
+  }
+
+  .result {
+    padding: 18px 12px;
+    border-radius: 18px;
+  }
+
+  .total {
+    font-size: 60px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 10px;
+  }
+
+  .row {
+    padding: 10px 14px;
+  }
+
+  .prices {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
