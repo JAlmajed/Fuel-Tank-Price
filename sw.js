@@ -1,5 +1,5 @@
 // Bump this number whenever you want every device to drop its old cache.
-const CACHE_NAME = "bahrain-fuel-cost-v3";
+const CACHE_NAME = "bahrain-fuel-cost-v4";
 
 const FILES_TO_CACHE = [
     "./",
@@ -8,9 +8,9 @@ const FILES_TO_CACHE = [
     "./app.js",
     "./prices.json",
     "./manifest.json",
-    "./apple-touch-icon.png",
-    "./favicon.ico",
-    "./favicon-32.png"
+    "./icon-v2-180.png",
+    "./icon-v2.ico",
+    "./icon-v2-32.png"
 ];
 
 self.addEventListener("install", function (event) {
