@@ -4,7 +4,7 @@
 (function () {
     "use strict";
 
-    var STORE_KEY = "bahrain-fuel-cost-v1";
+    var STORE_KEY = "bahrain-fuel-cost-v2";
 
     var FUELS = [
         { id: "jayyid", name: "Jayyid 91" },
@@ -20,7 +20,7 @@
         prices: { jayyid: 0.235, mumtaz: 0.277, super: 0.410, diesel: 0.260 }
     };
 
-    var DEFAULTS = { fuel: "mumtaz", mode: "km", km: 1200, cons: 8.5, tank: 45, fills: 4 };
+    var DEFAULTS = { fuel: "mumtaz", mode: "fill", km: 1200, cons: 8.5, tank: 45, fills: 1 };
 
     var data = FALLBACK;        // latest official prices
     var saved = {};             // values stored on this device

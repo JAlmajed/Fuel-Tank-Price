@@ -27,12 +27,12 @@
         <select id="fuel" aria-label="Fuel type"></select>
 
         <div class="seg" role="group" aria-label="Calculation method">
-            <button id="modeKm" type="button" aria-pressed="true">By distance</button>
-            <button id="modeFill" type="button" aria-pressed="false">By fill-ups</button>
+            <button id="modeKm" type="button" aria-pressed="false">By distance</button>
+            <button id="modeFill" type="button" aria-pressed="true">By fill-ups</button>
         </div>
     </div>
 
-    <div class="inputs" id="kmInputs">
+    <div class="inputs" id="kmInputs" hidden>
 
         <div class="card">
             <label class="card-label" for="km">Distance per month (km)</label>
@@ -54,7 +54,7 @@
 
     </div>
 
-    <div class="inputs" id="fillInputs" hidden>
+    <div class="inputs" id="fillInputs">
 
         <div class="card">
             <label class="card-label" for="tank">Litres per fill-up</label>
