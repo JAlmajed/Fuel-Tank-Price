@@ -1,5 +1,5 @@
 // Bump this number whenever you want every device to drop its old cache.
-const CACHE_NAME = "bahrain-fuel-cost-v4";
+const CACHE_NAME = "bahrain-fuel-cost-v5";
 
 const FILES_TO_CACHE = [
     "./",

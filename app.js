@@ -160,9 +160,48 @@
             sel.options[i].textContent = FUELS[i].name + " · " + f3(price(FUELS[i].id)) + " BHD/L";
         }
 
+        renderLast(u, month);
+
         if (!keepPriceBoxes) buildPriceInputs();
         showMode();
         save();
+    }
+
+    function lastMonth() {
+        var h = data.history;
+        if (!h || !h.length || !h[0].prices) return null;
+        var ok = FUELS.every(function (f) { return h[0].prices[f.id] > 0; });
+        return ok ? h[0] : null;
+    }
+
+    function fils(n) {
+        var v = Math.round(n * 1000);
+        return (v > 0 ? "+" : v < 0 ? "-" : "") + Math.abs(v) + " fils";
+    }
+
+    function renderLast(u, month) {
+        var last = lastMonth();
+        $("lastSection").hidden = !last;
+        $("lastLine").hidden = !last;
+        if (!last) return;
+
+        var lastCost = u.litres * last.prices[state.fuel];
+        var diff = month - lastCost;
+        var diffText = Math.abs(diff) < 0.0005 ? "no change" : (diff > 0 ? "+" : "-") + f3(Math.abs(diff)) + " BHD";
+        $("lastLine").innerHTML = "Last month (" + last.month + "): <b>" + f3(lastCost) + " BHD</b> &middot; " + diffText;
+
+        $("lastTitle").textContent = "Compared with " + last.month;
+        $("lastCompare").innerHTML = FUELS.map(function (f) {
+            var now = price(f.id), before = last.prices[f.id];
+            var change = now - before;
+            var cls = Math.abs(change) < 0.0005 ? "same" : change > 0 ? "up" : "down";
+            var text = cls === "same" ? "No change" : fils(change);
+            return '<div class="row' + (f.id === state.fuel ? " on" : "") + '">' +
+                '<div class="name">' + f.name + '<small>' + f3(before) + ' &rarr; ' + f3(now) + '</small></div>' +
+                '<div class="val">' + f3(u.litres * before) + '<small>last month</small></div>' +
+                '<div class="val chg ' + cls + '">' + text + '<small>per litre</small></div>' +
+                '</div>';
+        }).join("");
     }
 
     function showMode() {

@@ -1,13 +1,35 @@
 {
   "month": "November 2026",
   "effective": "2026-11-02",
-  "updated": "2026-11-05",
+  "updated": "2026-11-10",
   "currency": "BHD",
   "unit": "per litre",
   "prices": {
     "jayyid": 0.235,
     "mumtaz": 0.277,
-    "super": 0.410,
-    "diesel": 0.260
-  }
+    "super": 0.41,
+    "diesel": 0.26
+  },
+  "history": [
+    {
+      "month": "October 2026",
+      "effective": "2026-10-02",
+      "prices": {
+        "jayyid": 0.235,
+        "mumtaz": 0.277,
+        "super": 0.41,
+        "diesel": 0.26
+      }
+    },
+    {
+      "month": "September 2026",
+      "effective": "2026-09-02",
+      "prices": {
+        "jayyid": 0.225,
+        "mumtaz": 0.247,
+        "super": 0.38,
+        "diesel": 0.229
+      }
+    }
+  ]
 }

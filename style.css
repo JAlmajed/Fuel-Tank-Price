@@ -12,6 +12,7 @@
   --mute: rgba(243, 247, 250, 0.62);
   --ball: #ff8a1f;
   --red: #ff7a7a;
+  --green: #6fdc9a;
 }
 
 * {
@@ -236,6 +237,18 @@ option {
   color: var(--ball);
 }
 
+.last-line {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--mute);
+}
+
+.last-line b {
+  color: var(--paper);
+  font-variant-numeric: tabular-nums;
+}
+
 .stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -310,6 +323,10 @@ option {
   font-weight: 600;
   color: var(--mute);
 }
+
+.chg.up { color: var(--red); }
+.chg.down { color: var(--green); }
+.chg.same { color: var(--mute); }
 
 /* Prices */
 

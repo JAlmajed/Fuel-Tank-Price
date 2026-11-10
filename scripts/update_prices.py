@@ -103,6 +103,17 @@ def main():
         prices = parse_prices(page)
         if not sane(prices):
             continue
+        history = current.get("history", [])
+        if current.get("prices"):
+            history.insert(
+                0,
+                {
+                    "month": current.get("month"),
+                    "effective": current.get("effective"),
+                    "prices": current["prices"],
+                },
+            )
+        current["history"] = history[:12]
         current.update(
             {
                 "month": f"{month} {year}",
